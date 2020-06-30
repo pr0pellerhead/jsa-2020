@@ -1,0 +1,65 @@
+console.log('HELLO WORLD');
+
+
+
+// git clone git@github.com:pr0pellerhead/PROEKT.git
+// cd PROEKT
+// mkdir c1
+// cd c1
+// креирај indes.js фајл во c1 директориумот
+// npm init -y
+
+// edit на package.json
+// додавање на:
+// "start": "node index.js",
+
+
+HTTP - Hypertext Transfer Protocol
+REST - Representational State Transfer
+REST е суперсет на HTTP
+
+Што е GET?
+GET е HTTP метод
+
+Дали постојат други HTTP методи?
+
+HTTP -> GET, POST
+REST -> GET, POST, PUT, PATCH, DELETE
+
+Што најчесто сервира HTTP, а што REST?
+HTTP -> HTML
+REST -> JSON
+
+JSON - Javascript Object Notation
+Javascript објект претставен како текст
+
+REST API
+API - Application Programming Interface
+
+
+
+
+
+
+
+
+resource name: students
+
+get all students
+GET /students
+
+get one student (with ID 12)
+GET /students/12
+
+add new student
+POST /students
+
+delete a student (with ID 12)
+DELETE /students/12
+
+update whole student object (with ID 12)
+PUT /students/12
+
+update only certain properties of student (with ID 12)
+PATCH /students/12
+
