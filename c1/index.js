@@ -1,7 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const handlers = require('./handlers');
 
 const api = express();
+api.use(bodyParser.json());
 
 api.get('/students', handlers.getAllStudents);
 api.get('/students/:id', handlers.getSingleStudent);
