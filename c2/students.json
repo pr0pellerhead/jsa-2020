@@ -1,0 +1,5 @@
+[
+    {"id": 1, "fname": "Pero", "lname": "Perovski", "gpa": 9.2},
+    {"id": 2, "fname": "Janko", "lname": "Jankovski", "gpa": 7.0},
+    {"id": 3, "fname": "Stanko", "lname": "Stankovski", "gpa": 6.1}
+]
