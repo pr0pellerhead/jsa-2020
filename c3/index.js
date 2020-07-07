@@ -1,8 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const config = require('./pkg/config');
+const db = require('./pkg/db');
 
 const students = require('./handlers/students');
 const classes = require('./handlers/classes');
+
+db.init();
 
 const api = express();
 api.use(bodyParser.json());
@@ -16,8 +20,8 @@ api.put('/students/:id', students.update);
 api.patch('/students/:id', students.patch);
 
 // classes resource
-api.get('/classes', classes.ghetAll);
-api.get('/classes/:id', classes.ghetSingle);
+api.get('/classes', classes.getAll);
+api.get('/classes/:id', classes.getSingle);
 api.post('/classes', classes.create);
 api.delete('/classes/:id', classes.remove);
 api.put('/classes/:id', classes.update);
@@ -25,9 +29,15 @@ api.patch('/classes/:id', classes.patch);
 
 // ... resource
 
-api.listen(8090, err => {
+api.listen(config.get('server').port, err => {
     if(err) {
         console.error(err);
     }
-    console.log('Service started on port 8090');
+    console.log('Service started on port', config.get('server').port);
 });
+
+// 1. Development environment (локален компјутер)
+// 1.5. Testing environment (QA)
+// 2. Staging environment (тест околина за клиентот да ја види апликацијата)
+// 3. Production environment (официјалната локација каде е поставена стабилната верзија на апликацијата)
+
