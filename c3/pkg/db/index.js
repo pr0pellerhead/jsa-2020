@@ -1,7 +1,6 @@
 // mongodb+srv://<username>:<password>@cluster0-c3iyx.mongodb.net/<dbname>?retryWrites=true&w=majority
 const mongoose = require('mongoose');
 const config = require('../config');
-var conn = null;
 
 const init = () => {
     let username = config.get('db').username;

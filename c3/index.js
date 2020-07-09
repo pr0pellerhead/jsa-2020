@@ -41,3 +41,6 @@ api.listen(config.get('server').port, err => {
 // 2. Staging environment (тест околина за клиентот да ја види апликацијата)
 // 3. Production environment (официјалната локација каде е поставена стабилната верзија на апликацијата)
 
+// http://127.0.0.1:8080/search?q=lorem
+// http://127.0.0.1:8080/search?q=ipsum (req.query.q)
+
