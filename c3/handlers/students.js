@@ -1,4 +1,5 @@
 const students = require('../pkg/students');
+const studentValidator = require('../pkg/students/validation');
 
 const getAll = (req, res) => {
     students.getAll()
@@ -8,7 +9,7 @@ const getAll = (req, res) => {
         .catch(err => {
             console.log(err);
             res.status(500).send('internal server error');
-        });    
+        });
 };
 
 const getSingle = (req, res) => {
@@ -23,7 +24,13 @@ const getSingle = (req, res) => {
 };
 
 const create = (req, res) => {
-    students.create(req.body)
+    studentValidator.validate(req.body)
+        .then(matches => {
+            if (!matches) {
+                throw 'Bad request';
+            }
+            return students.create(req.body);
+        })
         .then(() => {
             res.status(201).send('created');
         })
@@ -59,7 +66,7 @@ const update = (req, res) => {
             res.status(204).send('no content');
         })
         .catch(err => {
-            res.status(500).send('internal server error');            
+            res.status(500).send('internal server error');
         });
 };
 
@@ -69,7 +76,7 @@ const patch = (req, res) => {
             res.status(204).send('no content');
         })
         .catch(err => {
-            res.status(500).send('internal server error');            
+            res.status(500).send('internal server error');
         });
 };
 
