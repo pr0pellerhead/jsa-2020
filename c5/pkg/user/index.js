@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-const User = mongoose.Model(
+const User = mongoose.model(
     'user',
     {
         first_name: String,
@@ -25,7 +25,7 @@ const createUser = (data) => {
 
 const getUserByEmail = (email) => {
     return new Promise((success, fail) => {
-        User.find({email: email}, (err, data) => {
+        User.findOne({email: email}, (err, data) => {
             if (err) {
                 return fail(err);
             }
