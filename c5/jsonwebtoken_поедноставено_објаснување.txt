@@ -1,0 +1,44 @@
+
+
+JWT
+AAA.BBB.CCC
+
+AAA - Header (algoriram, tip)
+BBB - Payload (podatoci za korisnikot i tokenot)
+
+PPP - password (poznat samo na serverska strana)
+
+CCC = HS256(AAA+BBB+PPP)
+
+
+Логин процедура
+
+1. внесувате user и pass и кликате "log in"
+2. серверот ги добива вашите податоци и почнува со обработка
+3. Проверува дали постои корисник со таков email
+4. ако mail-от е познат, продолжува со споредба на password-от
+5. ако password-от се совпаѓа со она што се наоѓа во базата тогаш системот генерира JWT и му го испраќана корисникот
+
+Како се генерира JWT?
+
+1. се земаат податоци за корисникот
+2. се креира js објект кој бво себе содржи информации кои мислиме дека ќе ни бидат често потребни
+3. Payload (BBB): 
+{
+    uid: '972hpsd8h34p97dfh8dh498q',
+    firts_name: 'Pero',
+    last_name: 'Perovski',
+    email: 'pero@pero.com',
+    iat: 1516239022
+}
+4. Имаме payload, следно што ни треба е лозинка (PPP)
+5. Се собираат AAA + BBB + PPP (каде AAA секогаш има фиксна вредност) и се хешуваат со алгоритмот кој е запишан во AAA
+
+{alg:hs256}.
+{uid:'972hpsd8h34p97dfh8dh498q',firts_name:'Pero',last_name:'Perovski',email:'pero@pero.com',iat:1516239022}.cjiqbpcn2peiubcpq3inciqrbpciwqnpicubepqr9cnpeqr7bcq8renpc
+
+2.4.(10)
+
+a.b.p.(10)
+2.4.4.(10)
+

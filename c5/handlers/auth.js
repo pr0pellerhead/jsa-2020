@@ -1,6 +1,8 @@
 const validate = require('../pkg/user/validation');
 const user = require('../pkg/user');
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jsonwebtoken');
+var config = require('../pkg/config');
 
 const register = (req, res) => {
     validate.register(req.body)
@@ -49,7 +51,13 @@ const login = (req, res) => {
                 res.status(400).send('Bad request');
                 throw 'Bad request';
             }
-            res.status(200).send('ok');
+            let payload = {
+                name: `${u.first_name} ${u.last_name}`,
+                email: u.email,
+                iat: parseInt(new Date().getTime()/1000)
+            };
+            let token = jwt.sign(payload, config.get('server').key);
+            res.status(200).send({token: token});
         })
         .catch(err => {
             console.log(err);

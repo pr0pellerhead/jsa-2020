@@ -1,0 +1,13 @@
+{
+    "db": {
+        "host": "cluster0-c3iyx.mongodb.net",
+        "port": 27017,
+        "dbname": "store",
+        "username": "dev",
+        "password": "dev123!"
+    },
+    "server": {
+        "port": 8090,
+        "key": "tajna"
+    }
+}
