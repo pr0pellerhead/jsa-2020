@@ -8,19 +8,16 @@ const register = (req, res) => {
     validate.register(req.body)
         .then(matches => {
             if (!matches) {
-                res.status(400).send('bad request');
-                throw 'Bad request';
+                throw {message: 'Bad request', code: 400};
             }
             if (req.body.password !== req.body.password2) {
-                res.status(400).send('bad request');
-                throw 'Bad request';
+                throw { message: 'Bad request', code: 400 };
             }
             return user.getUserByEmail(req.body.email);
         })
         .then(u => {
             if (u !== null) {
-                res.status(409).send('conflict');
-                throw 'Conflict';
+                throw { message: 'Conflict', code: 409 };
             }
             req.body.password = bcrypt.hashSync(req.body.password);
             return user.createUser(req.body);
@@ -29,7 +26,7 @@ const register = (req, res) => {
             res.status(201).send('created');
         })
         .catch(err => {
-            res.status(500).send('internal server error');
+            res.status(err.code).send(err.message);
         });
 };
 
@@ -37,19 +34,16 @@ const login = (req, res) => {
     validate.login(req.body)
         .then(matches => {
             if (!matches) {
-                res.status(400).send('Bad request');
-                throw 'Bad request';
+                throw { message: 'Bad request', code: 400 };
             }
             return user.getUserByEmail(req.body.email);
         })
         .then(u => {
             if (u === null) {
-                res.status(400).send('Bad request');
-                throw 'Bad request';
+                throw { message: 'Bad request', code: 400 };
             }
             if (!bcrypt.compareSync(req.body.password, u.password)) {
-                res.status(400).send('Bad request');
-                throw 'Bad request';
+                throw { message: 'Bad request', code: 400 };
             }
             let payload = {
                 name: `${u.first_name} ${u.last_name}`,
@@ -60,8 +54,7 @@ const login = (req, res) => {
             res.status(200).send({token: token});
         })
         .catch(err => {
-            console.log(err);
-            res.status(500).send('Internal server error');
+            res.status(err.code).send(err.message);
         });
 };
 
