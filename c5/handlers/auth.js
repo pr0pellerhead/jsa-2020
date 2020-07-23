@@ -50,7 +50,7 @@ const login = (req, res) => {
                 name: `${u.first_name} ${u.last_name}`,
                 email: u.email,
                 iat: parseInt(new Date().getTime()/1000),
-                exp: parseInt((new Date().getTime() + (1 * 60 * 1000)) / 1000), // (1 * 60 * 1000) токенот истекува по една минута - 60 секунди
+                exp: parseInt((new Date().getTime() + (24 * 60 * 60 * 1000)) / 1000), // (1 * 60 * 1000) токенот истекува по една минута - 60 секунди
             };
             let token = jwt.sign(payload, config.get('server').key);
             res.status(200).send({token: token});
@@ -70,7 +70,7 @@ const refresh = (req, res) => {
         name: req.user.name,
         email: req.user.email,
         iat: parseInt(new Date().getTime() / 1000),
-        exp: parseInt((new Date().getTime() + (1 * 60 * 1000)) / 1000), // (1 * 60 * 1000) токенот истекува по една минута - 60 секунди
+        exp: parseInt((new Date().getTime() + (24 * 60 * 60 * 1000)) / 1000), // (1 * 60 * 1000) токенот истекува по една минута - 60 секунди
     };
     let token = jwt.sign(payload, config.get('server').key);
     res.status(200).send({ token: token });
