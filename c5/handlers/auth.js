@@ -3,6 +3,7 @@ const user = require('../pkg/user');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
 var config = require('../pkg/config');
+const mailer = require('../pkg/mailer');
 
 const register = (req, res) => {
     validate.register(req.body)
@@ -53,6 +54,7 @@ const login = (req, res) => {
                 exp: parseInt((new Date().getTime() + (24 * 60 * 60 * 1000)) / 1000), // (1 * 60 * 1000) токенот истекува по една минута - 60 секунди
             };
             let token = jwt.sign(payload, config.get('server').key);
+            mailer.loginNotification(`${u.first_name} ${u.last_name}`, u.email);
             res.status(200).send({token: token});
         })
         .catch(err => {
