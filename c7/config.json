@@ -1,0 +1,18 @@
+{
+    "db": {
+        "host": "",
+        "port": 1,
+        "dbname": "",
+        "username": "",
+        "password": ""
+    },
+    "server": {
+        "port": 1,
+        "key": "",
+        "upload_folder": "uploads"
+    },
+    "mailer": {
+        "domain": "",
+        "key": ""
+    }
+}
